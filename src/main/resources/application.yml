@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sbvue?createDatabaseIfNotExist=true&autoReconnect=true&showSSL=false
+    url: jdbc:mysql://devops-github-actions-db.database.azure.com:3306/devops-github-actions-db
     username: root
     password: root
   jpa:
