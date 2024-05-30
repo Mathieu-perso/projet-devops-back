@@ -17,16 +17,16 @@
 # For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
 
-name: Prod
+name: Dev
 
 env:
-  AZURE_WEBAPP_NAME: devops-github-actions-prod    # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: devops-github-actions-dev    # set this to the name of your Azure Web App
   JAVA_VERSION: '17'                  # set this to the Java version to use
   DISTRIBUTION: zulu                  # set this to the Java distribution
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
   workflow_dispatch:
 
 permissions:
@@ -75,5 +75,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_PROD }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_DEV }}
           package: '*.jar'
