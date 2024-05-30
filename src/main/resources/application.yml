@@ -1,9 +1,10 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://devops-github-actions-db.database.azure.com:3306/devops-github-actions-db
-    username: root
-    password: root
+    url: jdbc:mysql://hassanbrgserver.mysql.database.azure.com:3306/defaultdb?
+    createDatabaseIfNotExist=true&autoReconnect=true&showSSL=false
+    username: hassanbrgserver
+    password: ynov2024/
   jpa:
     properties:
       hibernate:
