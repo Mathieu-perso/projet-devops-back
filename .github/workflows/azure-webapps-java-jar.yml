@@ -52,13 +52,16 @@ jobs:
           name: java-app
 
       - name: Set environment variables
-        run: echo "AZURE_WEBAPP_NAME=${{ secrets['AZURE_WEBAPP_NAME_' + matrix.environment | toUpperCase()] }}" >> $GITHUB_ENV
-              echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets['AZURE_WEBAPP_PUBLISH_PROFILE_' + matrix.environment | toUpperCase()] }}" >> $GITHUB_ENV
+        #run: echo "AZURE_WEBAPP_NAME=${{ secrets['AZURE_WEBAPP_NAME_' + matrix.environment | toUpperCase()] }}" >> $GITHUB_ENV
+              #echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets['AZURE_WEBAPP_PUBLISH_PROFILE_' + matrix.environment | toUpperCase()] }}" >> $GITHUB_ENV
+
+        run: echo "AZURE_WEBAPP_NAME_DEV" >> $GITHUB_ENV
+              echo "AZURE_WEBAPP_PUBLISH_PROFILE_DEV" >> $GITHUB_ENV
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME_DEV }}
+          publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE_DEV }}
           package: '*.jar'
