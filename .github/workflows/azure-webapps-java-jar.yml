@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Java version
-        uses: actions/setup-java@v3.0.0
+        uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.DISTRIBUTION }}
@@ -51,10 +51,14 @@ jobs:
         with:
           name: java-app
 
+      - name: Set environment variables
+        run: echo "AZURE_WEBAPP_NAME=${{ secrets['AZURE_WEBAPP_NAME_' + matrix.environment | toUpperCase()] }}" >> $GITHUB_ENV
+              echo "AZURE_WEBAPP_PUBLISH_PROFILE=${{ secrets['AZURE_WEBAPP_PUBLISH_PROFILE_' + matrix.environment | toUpperCase()] }}" >> $GITHUB_ENV
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets['AZURE_WEBAPP_NAME_' + matrix.environment | upper] }}
-          publish-profile: ${{ secrets['AZURE_WEBAPP_PUBLISH_PROFILE_' + matrix.environment | upper] }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: '*.jar'
